@@ -83,7 +83,7 @@ body {
   flex: 1;
   font-size: 14px;
   margin-left: 6px;
-  margin-top: 5px;
+  margin-top: 20px;
   font-family: 'Ubuntu-B',serif;
 }
 .img{
@@ -100,6 +100,7 @@ body {
 .info{
   position: absolute;
   font-family: 'Ubuntu-B',serif;
+  margin-top: 12px;
 }
 .report{
   position: absolute;
@@ -197,7 +198,7 @@ body {
   margin: auto;
   font-size: 30px;
 }
-p{
+span{
   user-select: none;
   cursor: default;
 }
