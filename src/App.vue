@@ -31,12 +31,16 @@
           <p class="report" :style="{'font-size': language==='chinese' ? '12px' : '14px'}">{{ card.report }}</p>
         </div>
       </div>
+      <div class="addCard">
+        <p class="add" @click="sendMessage('get_history')" :style="{'font-size': language==='chinese' ? '30px' : '20px'}">{{ language === 'chinese' ? '加载历史消息' : 'Load history messages' }}</p>
+      </div>
     </div>
   </div>
+  <p class="marker">Made by 可爱猫娘</p>
 </template>
 
 <script setup lang="ts">
-import {statusColor, onlineStatus, filteredCards, language, changeRegion, getRegion} from "./superping"
+import {statusColor, onlineStatus, filteredCards, language, changeRegion, getRegion, sendMessage} from "./superping"
 </script>
 
 <style>
@@ -60,6 +64,7 @@ body {
   height: 100px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -160,5 +165,40 @@ body {
   to{
     transform: scale(1);
   }
+}
+.marker{
+  display: flex;
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  margin: 0;
+}
+.addCard{
+  display: flex;
+  width: 300px;
+  height: 100px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 5px dashed rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  animation: cardEnter 0.5s;
+}
+.addCard:hover{
+  transform: scale(1.05);
+}
+.add{
+  display: flex;
+  position: relative;
+  margin: auto;
+  font-size: 30px;
+}
+p{
+  user-select: none;
+  cursor: default;
 }
 </style>

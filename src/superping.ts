@@ -28,17 +28,33 @@ export function getRegion(region: Region) {
 const addCard = (card: Card) => {
     cards.value.unshift(card);
 };
-function getCurrentTime() {
-    const now = new Date();
+const historyCard = (card: Card) => {
+    cards.value.push(card);
+};
+function getCurrentTime(time?: string | Date) {
+    const now = time ? new Date(time) : new Date();
     const h = now.getHours().toString().padStart(2, '0');
     const m = now.getMinutes().toString().padStart(2, '0');
     const s = now.getSeconds().toString().padStart(2, '0');
     return `${h}:${m}:${s}`;
 }
-function createWebSocket(url: string) {
-    let ws: WebSocket;
-    let reconnectTimer: number | null = null;
 
+let ws: WebSocket;
+let reconnectTimer: number | null = null;
+let currentNextId : number | null = null;
+export const isLoading = ref(false);
+export function sendMessage(msg: string) {
+    if (isLoading.value) {
+        console.log('正在加载中，请稍候...');
+        return;
+    }
+    isLoading.value = true;
+    ws.send(JSON.stringify({
+        type: msg,
+        id: currentNextId
+    }));
+}
+function createWebSocket(url: string) {
     const connect = () => {
         ws = new WebSocket(url);
 
@@ -56,8 +72,9 @@ function createWebSocket(url: string) {
             const data = JSON.parse(event.data);
             console.log(data);
             if(data.type === "superping"){
+                if(!currentNextId) currentNextId = data.id;
                 addCard({
-                    id: Date.now() + Math.random().toString(36),
+                    id: data.id,
                     super: data.imageBase64,
                     region: data.server,
                     time: getCurrentTime(),
@@ -65,10 +82,25 @@ function createWebSocket(url: string) {
                     language: data.language,
                 })
             }
+            else if(data.type === "history"){
+                historyCard({
+                    id: data.id,
+                    super: data.imageBase64,
+                    region: data.server,
+                    time: getCurrentTime(data.time),
+                    report: data.content,
+                    language: data.language,
+                })
+            }
+            else if (data.type === 'history_end') {
+                currentNextId = data.nextId;
+                isLoading.value = false;
+            }
         };
 
         ws.onerror = (err) => {
             console.error('WebSocket 出错', err);
+            isLoading.value = false;
         };
 
         ws.onclose = () => {
@@ -84,5 +116,6 @@ function createWebSocket(url: string) {
 }
 
 createWebSocket('ws://localhost:8080');
+// createWebSocket('wss://compass.betterflorr.top/ws');
 
 window.addCard = addCard;

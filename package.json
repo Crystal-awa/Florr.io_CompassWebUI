@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "http-server dist -p 7245"
   },
   "dependencies": {
     "vue": "^3.5.22",

@@ -1,18 +1,17 @@
-// function getBase64Image(img) {
-//     // Create an empty canvas element
-//     const canvas = document.createElement("canvas");
-//     canvas.width = img.width;
-//     canvas.height = img.height;
-//
-//     // Copy the image contents to the canvas
-//     const ctx = canvas.getContext("2d");
-//     ctx?.drawImage(img, 0, 0);
-//
-//     // Get the data-URL formatted image
-//     // Firefox supports PNG and JPEG. You could check img.src to
-//     // guess the original format, but be aware the using "image/jpg"
-//     // will re-encode the image.
-//     const dataURL = canvas.toDataURL("image/png");
-//
-//     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+// export function notifyMe(message: string): void {
+//     if (!("Notification" in window)) {
+//         // 检查浏览器是否支持通知
+//         alert("当前浏览器不支持桌面通知");
+//     } else if (Notification.permission === "granted") {
+//         // 检查是否已授予通知权限；如果是的话，创建一个通知
+//         new Notification(message);
+//     } else if (Notification.permission !== "denied") {
+//         // 我们需要征求用户的许可
+//         Notification.requestPermission().then((permission) => {
+//             // 如果用户接受，我们就创建一个通知
+//             if (permission === "granted") {
+//                 new Notification(message);
+//             }
+//         });
+//     }
 // }
