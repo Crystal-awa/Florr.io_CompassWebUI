@@ -31,7 +31,7 @@
           <p class="report" :style="{'font-size': language==='chinese' ? '12px' : '14px'}">{{ card.report }}</p>
         </div>
       </div>
-      <div class="addCard">
+      <div class="addCard" v-if="hasMore">
         <p class="add" @click="sendMessage('get_history')" :style="{'font-size': language==='chinese' ? '30px' : '20px'}">{{ language === 'chinese' ? '加载历史消息' : 'Load history messages' }}</p>
       </div>
     </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import {statusColor, onlineStatus, filteredCards, language, changeRegion, getRegion, sendMessage} from "./superping"
+import {statusColor, onlineStatus, filteredCards, language, changeRegion, getRegion, sendMessage, hasMore} from "./superping"
 </script>
 
 <style>

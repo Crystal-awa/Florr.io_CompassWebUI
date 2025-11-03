@@ -43,6 +43,7 @@ let ws: WebSocket;
 let reconnectTimer: number | null = null;
 let currentNextId : number | null = null;
 export const isLoading = ref(false);
+export const hasMore = ref(true);
 export function sendMessage(msg: string) {
     if (isLoading.value) {
         console.log('正在加载中，请稍候...');
@@ -94,6 +95,7 @@ function createWebSocket(url: string) {
             }
             else if (data.type === 'history_end') {
                 currentNextId = data.nextId;
+                hasMore.value = data.hasMore;
                 isLoading.value = false;
             }
         };
