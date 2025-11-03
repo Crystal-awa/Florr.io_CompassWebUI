@@ -31,8 +31,8 @@
           <p class="report" :style="{'font-size': language==='chinese' ? '12px' : '14px'}">{{ card.report }}</p>
         </div>
       </div>
-      <div class="addCard" v-if="hasMore">
-        <p class="add" @click="sendMessage('get_history')" :style="{'font-size': language==='chinese' ? '30px' : '20px'}">{{ language === 'chinese' ? '加载历史消息' : 'Load history messages' }}</p>
+      <div class="addCard" v-if="hasMore" @click="sendMessage('get_history')">
+        <p class="add" :style="{'font-size': language==='chinese' ? '30px' : '20px'}">{{ language === 'chinese' ? '加载历史消息' : 'Load history messages' }}</p>
       </div>
     </div>
   </div>

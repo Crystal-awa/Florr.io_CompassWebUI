@@ -117,7 +117,7 @@ function createWebSocket(url: string) {
     connect();
 }
 
-createWebSocket('ws://localhost:8080');
-// createWebSocket('wss://compass.betterflorr.top/ws');
+// createWebSocket('ws://localhost:8080');
+createWebSocket('wss://compass.betterflorr.top/ws');
 
 window.addCard = addCard;
