@@ -1,14 +1,14 @@
 <template>
   <link href="https://static.florr.io/3fd3a6c707c5ab36fa901ae4d5d09274f936be28/Ubuntu-B.ttf" rel="stylesheet">
   <div class="header">
-    <p class="SuperPing">SuperPing</p>
+    <span class="SuperPing">SuperPing</span>
     <button class="button" @click="changeRegion('US')" :style="{ color: getRegion('US') ? 'red' : 'black' }">US</button>
     <button class="button" @click="changeRegion('EU')" :style="{ color: getRegion('EU') ? 'red' : 'black' }">EU</button>
     <button class="button" @click="changeRegion('AS')" :style="{ color: getRegion('AS') ? 'red' : 'black' }">AS</button>
-    <p class = "flex"></p>
+    <span class = "flex"></span>
     <button class="button" @click="language='chinese'" :style="{ color: language === 'chinese' ? 'red' : 'black' }">中文</button>
     <button class="button" @click="language='english'" :style="{ color: language === 'english' ? 'red' : 'black' }">English</button>
-    <p class="status-text" :style="{ color: statusColor }">{{ onlineStatus ? "Online" : "Offline"}}</p>
+    <span class="status-text" :style="{ color: statusColor }">{{ onlineStatus ? "Online" : "Offline"}}</span>
   </div>
   <div class="container">
     <div class="row">
@@ -24,19 +24,19 @@
           >
         </div>
         <div class="title">
-          <p class="region">{{ card.region }}</p>
-          <p class="time">[{{ card.time }}]</p>
+          <span class="region">{{ card.region }}</span>
+          <span class="time">[{{ card.time }}]</span>
         </div>
         <div class="info">
-          <p class="report" :style="{'font-size': language==='chinese' ? '12px' : '14px'}">{{ card.report }}</p>
+          <span class="report" :style="{'font-size': language==='chinese' ? '12px' : '14px'}">{{ card.report }}</span>
         </div>
       </div>
       <div class="addCard" v-if="hasMore" @click="sendMessage('get_history')">
-        <p class="add" :style="{'font-size': language==='chinese' ? '30px' : '20px'}">{{ language === 'chinese' ? '加载历史消息' : 'Load history messages' }}</p>
+        <span class="add" :style="{'font-size': language==='chinese' ? '30px' : '20px'}">{{ language === 'chinese' ? '加载历史消息' : 'Load history messages' }}</span>
       </div>
     </div>
   </div>
-  <p class="marker">Made by 可爱猫娘</p>
+  <span class="marker">Made by 可爱猫娘</span>
 </template>
 
 <script setup lang="ts">
@@ -102,7 +102,7 @@ body {
   font-family: 'Ubuntu-B',serif;
 }
 .report{
-  position: relative;
+  position: absolute;
   left: 80px;
   top: 25px;
   width: 200px;
@@ -169,7 +169,7 @@ body {
 .marker{
   display: flex;
   position: absolute;
-  right: 5px;
+  left: 0;
   bottom: 0;
   margin: 0;
 }
